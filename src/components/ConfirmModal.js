@@ -8,9 +8,10 @@ const ConfirmModal = ({ setOpen3 }) => {
 
   //get price from localstorage
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setInterval(() => {
       setPrice(localStorage.getItem("price"));
-    }, 100);
+    });
+    return () => clearInterval(timer);
   }, [price]);
 
   //get selected data from localstorage

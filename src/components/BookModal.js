@@ -82,10 +82,11 @@ const BookModal = ({ ...arg }) => {
   //combinefunction for handling two modal close/open functionality
   const combineFunction = () => {
     setOpen(false);
-    setTimeout(() => {
+    const timer = setInterval(() => {
       localStorage.setItem("price", estimate_price);
       localStorage.setItem("selectedObj", JSON.stringify(selectedObj));
-    }, 1000);
+    });
+    return () => clearInterval(timer);
   };
   const closeModal = () => {
     setOpen3(false);
