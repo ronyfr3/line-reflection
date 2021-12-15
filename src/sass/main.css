@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+}
+
+.table_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.table_wrapper table {
+  width: 50%;
+  border-spacing: 0;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
+.table_wrapper table tr:last-child td {
+  border-bottom: 0;
+}
+
+.table_wrapper table th,
+.table_wrapper table td {
+  margin: 0;
+  text-align: center;
+  padding: 0.1rem 0.1rem;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+}
+
+.table_wrapper table th:last-child,
+.table_wrapper table td:last-child {
+  border-right: 0;
+}
+
+.table_wrapper .btn_container {
+  margin-top: 1.5rem;
+}
+
+.table_wrapper .btn_container .btn1 {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #232a2c;
+  padding: 9px 20px 9px 20px;
+  border-radius: 4px;
+  color: white;
+  margin: 0.2rem;
+  text-transform: capitalize;
+}
+
+.table_wrapper .btn_container .btn2 {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #cb7a00;
+  padding: 9px 20px 9px 20px;
+  border-radius: 4px;
+  color: white;
+  margin: 0.2rem;
+  text-transform: capitalize;
+}
+
+.app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 5em auto;
+}
+
+form input {
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  border: 1px solid gray;
+  outline: none;
+}
+
+form button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #009ccb;
+  padding: 9px 20px 9px 20px;
+  border-radius: 4px;
+  color: white;
+  margin: 0.2rem;
+  text-transform: capitalize;
+}
+
+.modal_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: white;
+  -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 380px;
+  height: 250px;
+  border-radius: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal_wrapper h3 {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #3f3e3e;
+}
+
+.modal_wrapper select {
+  padding: 0.4rem;
+}
+
+.modal_wrapper .inputField {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.modal_wrapper .inputField input {
+  margin: 0.3rem;
+}
+
+.modal_wrapper .confirm {
+  position: absolute;
+  right: 1em;
+  bottom: 1.5em;
+}
+
+.modal_wrapper .confirm span {
+  margin: 1rem;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.modalmsg_wrapper {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 50%);
+          transform: translate(-50%, 50%);
+  background-color: white;
+  -webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modalmsg_wrapper .details {
+  width: 100%;
+  margin: 2.5rem;
+}
+
+.modalmsg_wrapper .details h3 {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #3f3e3e;
+}
+/*# sourceMappingURL=main.css.map */
