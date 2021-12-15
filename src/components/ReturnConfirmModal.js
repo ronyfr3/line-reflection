@@ -5,7 +5,7 @@ const ReturnConfirmModal = ({ setOpen4 }) => {
 
   //get price from localstorage
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
       setPrice(localStorage.getItem("returnPrice"));
     }, 100);
     return () => clearInterval(timer);

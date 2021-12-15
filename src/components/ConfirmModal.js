@@ -10,7 +10,7 @@ const ConfirmModal = ({ setOpen3 }) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setPrice(localStorage.getItem("price"));
-    });
+    },100);
     return () => clearInterval(timer);
   }, [price]);
 

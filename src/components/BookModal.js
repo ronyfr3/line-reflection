@@ -85,7 +85,7 @@ const BookModal = ({ ...arg }) => {
     const timer = setInterval(() => {
       localStorage.setItem("price", estimate_price);
       localStorage.setItem("selectedObj", JSON.stringify(selectedObj));
-    });
+    },100);
     return () => clearInterval(timer);
   };
   const closeModal = () => {
