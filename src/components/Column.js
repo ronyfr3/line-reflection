@@ -21,6 +21,6 @@ export const COLUMNS = [
   },
   {
     Header: "Mileage",
-    accessor: (row) => (row.mileage === null ? "null" : row.mileage),
+    accessor: (row) => (row.mileage === null ? 0 : row.mileage),
   },
 ];

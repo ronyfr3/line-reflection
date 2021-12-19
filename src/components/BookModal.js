@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getData } from "../redux/actions/data";
 
 const BookModal = ({ ...arg }) => {
   const { setOpen, setOpen3, setPrice, setSelectedItem } = arg;
-
+  const dispatch = useDispatch();
   const all_data = useSelector((state) => state.data.data);
-  const bookedItems = React.useMemo(() =>(
-    JSON.parse(localStorage.getItem("bookedItems")) || []
-  ),[]);
+  const bookedItems = React.useMemo(
+    () => JSON.parse(localStorage.getItem("bookedItems")) || [],
+    []
+  );
   const availableProduct = React.useMemo(
     () =>
       all_data.filter(
@@ -18,11 +20,6 @@ const BookModal = ({ ...arg }) => {
       ),
     [all_data, bookedItems]
   );
-
-  console.log(availableProduct);
-
-  const [mileage, setMileage] = useState(0);
-  const [durability, setDurability] = useState();
 
   const [selectedValue, setSelectedValue] = useState(availableProduct[0]?.name);
   const selectedData = all_data?.find((x) => x.name === selectedValue);
@@ -65,38 +62,21 @@ const BookModal = ({ ...arg }) => {
     validity = false;
   }
 
-  //calculate initial mileage
-  const prev_mileage = React.useMemo(
-    () => all_data.find((item) => item.name === selectedValue),
-    [all_data, selectedValue]
-  );
-  // console.log(prev_mileage);
-
-  useEffect(() => {
-    prev_mileage.type === "meter" && setMileage(prev_mileage.mileage);
-  }, [setMileage, prev_mileage]);
-
-  //durability calculate
-  const durabilityCheck = React.useMemo(
-    () => all_data.find((item) => item.name === selectedValue),
-    [all_data, selectedValue]
-  );
-
-  useEffect(() => {
-    durabilityCheck.type === "meter" &&
-      setDurability(durabilityCheck.durability - date * 2);
-    durabilityCheck.type === "plain" &&
-      setDurability(durabilityCheck.durability - date * 1);
-  }, [setDurability, durabilityCheck, date]);
-
-  //combinefunction for handling two modal close/open functionality
   const combineFunction = () => {
-    const returningMileage = mileage + date * 10;
+    const allItems = JSON.parse(localStorage.getItem("apiData"));
+    const selectedData = allItems?.find((x) => x.name === selectedValue);
+
+    const updatedItem = [
+      {
+        ...selectedData,
+        availability: false,
+      },
+      ...allItems.filter((item) => item.name !== selectedData?.name),
+    ];
+    localStorage.setItem("apiData", JSON.stringify(updatedItem));
+    dispatch(getData());
     const selectedObj = {
       selectedData,
-      mileage,
-      returningMileage,
-      durability,
       to,
       from,
     };
