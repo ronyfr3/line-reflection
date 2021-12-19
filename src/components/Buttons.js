@@ -10,6 +10,8 @@ const Buttons = () => {
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
   const [open4, setOpen4] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+  const [price, setPrice] = useState(0);
 
   const openModal = () => {
     setOpen(true);
@@ -26,8 +28,23 @@ const Buttons = () => {
       <button className="btn1" onClick={openModal}>
         Book
       </button>
-      {open && <BookModal setOpen={setOpen} setOpen3={setOpen3} />}
-      {open ? "" : open3 && <ConfirmModal setOpen3={setOpen3} />}
+      {open && (
+        <BookModal
+          setOpen={setOpen}
+          setOpen3={setOpen3}
+          setSelectedItem={setSelectedItem}
+          setPrice={setPrice}
+        />
+      )}
+      {open
+        ? ""
+        : open3 && (
+            <ConfirmModal
+              setOpen3={setOpen3}
+              price={price}
+              selectedItem={selectedItem}
+            />
+          )}
       <button className="btn2" onClick={openModal2}>
         Return
       </button>

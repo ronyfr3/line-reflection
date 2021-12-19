@@ -1,24 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { confirmData } from "../redux/actions/data";
 
-const ConfirmModal = ({ setOpen3 }) => {
-  const [price, setPrice] = useState();
-  const [selectedItem, setSelectedItem] = useState();
-
-  //get price from localstorage
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setPrice(localStorage.getItem("price"));
-    },100);
-    return () => clearInterval(timer);
-  }, [price]);
-
-  //get selected data from localstorage
-  useEffect(() => {
-    setSelectedItem(JSON.parse(localStorage.getItem("selectedObj")));
-  }, [selectedItem]);
-
+const ConfirmModal = ({ setOpen3, price, selectedItem }) => {
   let dispatch = useDispatch();
 
   const dispatchFn = () => {

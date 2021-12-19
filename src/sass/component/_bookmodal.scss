@@ -27,12 +27,11 @@
   }
   .dates {
     @include flex(row, center, center);
-    label{
-      font-size:0.8rem
+    label {
+      font-size: 0.8rem;
     }
-    input{
-      width: 80px;
-      margin:0 0.3rem;
+    input {
+      margin: 0 0.3rem;
     }
   }
   .exit_buttons {
@@ -75,6 +74,23 @@
       box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
     }
   }
+}
+.not_available {
+  color: crimson;
+  margin: 0.6rem 0;
+}
+.close_btn {
+  border: 1px solid red;
+  outline: none;
+  cursor: pointer;
+  padding: 8px 20px 8px 20px;
+  border-radius: 4px;
+  color: red;
+  background-color: white;
+  margin: 0.2rem;
+  text-transform: capitalize;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin: 0.6rem 0;
 }
 @media screen and (max-width: 600px) {
   .BookModal_wrapper {

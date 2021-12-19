@@ -29,13 +29,14 @@ export const getData = () => async (dispatch) => {
 
 //GET_CONFIRMED_DATA
 export const confirmData = (data) => async (dispatch, getState) => {
-  console.log("data", data);
   try {
     dispatch({
       type: FILTERED_LIST_SUCCESS,
       payload: data,
     });
-    localStorage.setItem("returnProduct", JSON.stringify(getState().data));
+    const currentObjects = JSON.parse(localStorage.getItem("bookedItems")) || [];
+    currentObjects.push(data)
+    localStorage.setItem("bookedItems", JSON.stringify(currentObjects));
   } catch (error) {
     dispatch({
       type: FILTERED_LIST_FAIL,

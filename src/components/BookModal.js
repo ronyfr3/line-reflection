@@ -2,15 +2,30 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const BookModal = ({ ...arg }) => {
-  const { setOpen, setOpen3 } = arg;
+  const { setOpen, setOpen3, setPrice, setSelectedItem } = arg;
 
   const all_data = useSelector((state) => state.data.data);
+  const bookedItems = React.useMemo(() =>(
+    JSON.parse(localStorage.getItem("bookedItems")) || []
+  ),[]);
+  const availableProduct = React.useMemo(
+    () =>
+      all_data.filter(
+        (item) =>
+          !bookedItems.find(
+            (bookedItem) => bookedItem.selectedData.name === item.name
+          )
+      ),
+    [all_data, bookedItems]
+  );
+
+  console.log(availableProduct);
 
   const [mileage, setMileage] = useState(0);
   const [durability, setDurability] = useState();
 
-  const [dropdown, setDropdown] = useState(all_data[0]?.name);
-  const selectedData = all_data?.find((x) => x.name === dropdown);
+  const [selectedValue, setSelectedValue] = useState(availableProduct[0]?.name);
+  const selectedData = all_data?.find((x) => x.name === selectedValue);
 
   //DATEPICKER STATE
   const [from, setFrom] = useState("");
@@ -51,7 +66,10 @@ const BookModal = ({ ...arg }) => {
   }
 
   //calculate initial mileage
-  const prev_mileage = all_data.find((item) => item.name === dropdown);
+  const prev_mileage = React.useMemo(
+    () => all_data.find((item) => item.name === selectedValue),
+    [all_data, selectedValue]
+  );
   // console.log(prev_mileage);
 
   useEffect(() => {
@@ -59,7 +77,11 @@ const BookModal = ({ ...arg }) => {
   }, [setMileage, prev_mileage]);
 
   //durability calculate
-  const durabilityCheck = all_data.find((item) => item.name === dropdown);
+  const durabilityCheck = React.useMemo(
+    () => all_data.find((item) => item.name === selectedValue),
+    [all_data, selectedValue]
+  );
+
   useEffect(() => {
     durabilityCheck.type === "meter" &&
       setDurability(durabilityCheck.durability - date * 2);
@@ -67,26 +89,21 @@ const BookModal = ({ ...arg }) => {
       setDurability(durabilityCheck.durability - date * 1);
   }, [setDurability, durabilityCheck, date]);
 
-  //calculate estimate price
-  // console.log(isNaN(date)===false?date:1);
-  let estimate_price = date * selectedData?.price;
-  // console.log(estimate_price);
-
-  let returningMileage = mileage + date * 10;
-  const selectedObj = {
-    selectedData,
-    mileage,
-    returningMileage,
-    durability,
-  };
   //combinefunction for handling two modal close/open functionality
   const combineFunction = () => {
+    const returningMileage = mileage + date * 10;
+    const selectedObj = {
+      selectedData,
+      mileage,
+      returningMileage,
+      durability,
+      to,
+      from,
+    };
+    const estimate_price = date * selectedData?.price;
+    setPrice(estimate_price);
+    setSelectedItem(selectedObj);
     setOpen(false);
-    const timer = setInterval(() => {
-      localStorage.setItem("price", estimate_price);
-      localStorage.setItem("selectedObj", JSON.stringify(selectedObj));
-    },100);
-    return () => clearInterval(timer);
   };
   const closeModal = () => {
     setOpen3(false);
@@ -98,13 +115,13 @@ const BookModal = ({ ...arg }) => {
       <select
         defaultValue={"DEFAULT"}
         onChange={(e) => {
-          setDropdown(e.target.value);
+          setSelectedValue(e.target.value);
         }}
       >
         <option value="DEFAULT" disabled hidden>
-          {dropdown}
+          {selectedValue}
         </option>{" "}
-        {all_data?.map((x, i) => {
+        {availableProduct?.map((x, i) => {
           return (
             <option value={x.name} key={i}>
               {x.name}
